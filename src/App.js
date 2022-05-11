@@ -1,14 +1,13 @@
-import logo from './logo.svg';
-import './App.css';
+import 'bulma/css/bulma.min.css';
+import './assets/css/index.css';
+import HomeContent from './components/pages/HomeContent';
+import DefaultLayout from './layout/Default';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Romero tech</p>
-      </header>
-    </div>
+    <DefaultLayout>
+      <HomeContent />
+    </DefaultLayout>
   );
 }
 

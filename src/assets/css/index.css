@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;700&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Nunito";
+  background-color: #3b3f48;
+}
+
+header,
+footer {
+  background-color: #282c34;
+  color: wheat;
+}
+
+.navbar .title {
+  color: white;
+}
