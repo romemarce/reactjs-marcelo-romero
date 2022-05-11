@@ -1,4 +1,5 @@
 import Categories from "./Categories"
+import Controls from "./Controls"
 
 const NavBar = () => {
   const listCategories = [
@@ -13,15 +14,8 @@ const NavBar = () => {
         <h1 className="title p-3">ROMEROTech</h1>
       </section>
       <section className="navbar-menu">
-        <div className="navbar-end">
-          <Categories items={listCategories} />
-
-        </div>
-        <div className="navbar-end">
-          <a className="navbar-item" href="#">
-            Carrito / Cuenta / otros
-          </a>
-        </div>
+        <Categories items={listCategories} />
+        <Controls />
       </section>
     </nav>
   )
