@@ -19,3 +19,23 @@ footer {
 .navbar .title {
   color: white;
 }
+.cart-widget {
+  position: relative;
+}
+.cart-widget img{
+  filter: invert(1);
+}
+.cart-widget span{
+  position: absolute;
+  top: -9px;
+  right: -5px;
+  background-color: #363636;
+  color: #e1e3e6;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  border-radius: 100%;
+  font-size: 13px;
+  font-weight: bold;
+  padding-top: 5px;
+}

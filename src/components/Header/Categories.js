@@ -5,7 +5,7 @@ const Categories = ({ items }) => {
       {
         items && items.map((e, k) => {
           return (
-            <a className="navbar-item" key={k}>
+            <a href="/" className="navbar-item" key={k}>
               {e.name}
             </a>
           )

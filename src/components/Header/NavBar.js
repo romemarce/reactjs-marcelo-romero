@@ -1,5 +1,5 @@
+import CartWidget from "./CartWidget"
 import Categories from "./Categories"
-import Controls from "./Controls"
 
 const NavBar = () => {
   const listCategories = [
@@ -15,7 +15,14 @@ const NavBar = () => {
       </section>
       <section className="navbar-menu">
         <Categories items={listCategories} />
-        <Controls />
+        <section className="navbar-end">
+          <a className="navbar-item">
+            <CartWidget count={4} />
+          </a>
+          <a className="navbar-item">
+            Cuenta
+          </a>
+        </section>
       </section>
     </nav>
   )
