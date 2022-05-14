@@ -16,15 +16,15 @@ const NavBar = () => {
       <section className="navbar-menu">
         <Categories items={listCategories} />
         <section className="navbar-end">
-          <a className="navbar-item">
+          <a href="/" className="navbar-item">
             <CartWidget count={4} />
           </a>
-          <a className="navbar-item">
+          <a href="/" className="navbar-item">
             Cuenta
           </a>
         </section>
       </section>
     </nav>
-  )
+  );
 }
 export default NavBar
