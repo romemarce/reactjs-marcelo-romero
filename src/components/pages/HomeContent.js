@@ -10,7 +10,7 @@ const HomeContent = () => {
     ];
   return (
     <main className="container">
-      <section className="columns is-multiline is-mobile">
+      <section className="columns is-multiline is-mobile is-justify-content-space-around	">
         <div className="column is-12">
           <TitleSection title="Tienda" />
         </div>
