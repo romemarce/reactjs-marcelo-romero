@@ -11,7 +11,7 @@ const NavBar = () => {
   return (
     <nav className="navbar is-dark">
       <section className="navbar-brand">
-        <h1 className="title p-3">ROMEROTech</h1>
+        <h1 className="title-logo p-3"><span>ROMERO</span>Tech</h1>
       </section>
       <section className="navbar-menu">
         <Categories items={listCategories} />

@@ -19,13 +19,16 @@ footer {
 .navbar .title {
   color: white;
 }
+
 .cart-widget {
   position: relative;
 }
-.cart-widget img{
+
+.cart-widget img {
   filter: invert(1);
 }
-.cart-widget span{
+
+.cart-widget span {
   position: absolute;
   top: -9px;
   right: -5px;
@@ -38,4 +41,38 @@ footer {
   font-size: 13px;
   font-weight: bold;
   padding-top: 5px;
+}
+
+.product-title {
+  font-weight: bold;
+}
+
+.product-price {
+  text-align: right;
+  font-weight: bold;
+  color: #37597e;
+  font-size: 20px;
+}
+
+/* UTILS */
+.title-logo{
+  color: #f3f3f3;
+  font-weight: bold;
+  font-size: 36px;
+}
+.title-logo span{
+  color:#7896b7;
+}
+.circle-loading {
+  margin: 10% auto;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #363636;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
