@@ -38,7 +38,7 @@ const ItemListContainer = () => {
     setLoading(true)
     const listar = new Promise((res, rej) => {
       setTimeout(() => {
-        if (true) res(listProduct)
+        if (true) res(listProduct);
         else rej("Error")
       }, 2000)
     });
