@@ -39,7 +39,7 @@ const ItemListContainer = () => {
     const listar = new Promise((res, rej) => {
       setTimeout(() => {
         if (true) res(listProduct);
-        else rej("Error");
+        else rej("Error")
       }, 2000)
     });
 
