@@ -30,6 +30,7 @@ const ItemCount = ({ stock }) => {
       </section>
       <style>{`
         .input-numeric {
+          max-width: 300px;
           display: grid;
           grid-template-columns: 30px auto 30px;
         }

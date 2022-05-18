@@ -53,7 +53,26 @@ footer {
   color: #37597e;
   font-size: 20px;
 }
-
+.product-single{
+  display: grid;
+  grid-template-columns: 400px auto;
+  max-width: 80%;
+  background-color: #fff;
+  margin: 20px auto;
+}
+.product-content {
+  padding: 10px;
+}
+.product-single-img {
+  object-fit: cover;
+  height: 300px;
+  width: 100%;
+}
+.product-single-price{
+  font-weight: bold;
+  color: #37597e;
+  font-size: 20px;
+}
 /* UTILS */
 .title-logo{
   color: #f3f3f3;
