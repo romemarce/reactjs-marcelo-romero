@@ -1,13 +1,24 @@
 import 'bulma/css/bulma.min.css';
+import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './assets/css/index.css';
-import HomeContent from './components/pages/HomeContent';
+import ErrorContainer from './components/pages/ErrorContainer';
+import ItemDetailContainer from './components/pages/ItemDetailContainer';
+import ItemListContainer from './components/pages/ItemListContainer';
 import DefaultLayout from './layout/Default';
-
-function App() {
+const App = () => {
   return (
-    <DefaultLayout>
-      <HomeContent />
-    </DefaultLayout>
+    <BrowserRouter>
+      <DefaultLayout>
+        <Routes>
+          <Route path='/' element={<ItemListContainer />} />
+          <Route path='/category/:id' element={<ItemListContainer />} />
+          <Route path='/item/:id' element={<ItemDetailContainer />} />
+
+          <Route path='/*' element={<ErrorContainer />} />
+        </Routes>
+      </DefaultLayout>
+    </BrowserRouter>
   );
 }
 

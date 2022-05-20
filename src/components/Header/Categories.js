@@ -1,3 +1,5 @@
+import React from "react"
+import { NavLink } from "react-router-dom"
 const Categories = ({ items }) => {
 
   return (
@@ -5,9 +7,9 @@ const Categories = ({ items }) => {
       {
         items && items.map((e, k) => {
           return (
-            <a href="/" className="navbar-item" key={k}>
+            <NavLink to={`/category/${e.id}`} className="navbar-item" key={k}>
               {e.name}
-            </a>
+            </NavLink>
           )
         })
       }

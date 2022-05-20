@@ -1,3 +1,4 @@
+import React from "react"
 const ErrorMessage = ({ title, message }) => {
   return (
     <article className="message is-warning" style={{maxWidth:"400px", margin:"20px auto"}}>

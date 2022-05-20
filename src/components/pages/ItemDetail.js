@@ -1,7 +1,9 @@
+import React from "react";
 import ItemCount from "./ItemCount";
 
 const ItemDetail = ({ product }) => {
-  const { id, title, price, pictureUrl, description, stock } = product;
+  
+  const { title, price, pictureUrl, description, stock } = product;
   return (
     <>
       <article className="product-single">

@@ -1,3 +1,4 @@
+import React from "react";
 const TitleSection = ({title})=>{
   return (
     <section className="hero is-dark mt-5">
