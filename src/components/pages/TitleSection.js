@@ -1,7 +1,7 @@
 import React from "react";
 const TitleSection = ({title})=>{
   return (
-    <section className="hero is-dark mt-5">
+    <section className="hero mt-5">
       <div className="hero-body">
         <p className="title">{title}</p>
       </div>

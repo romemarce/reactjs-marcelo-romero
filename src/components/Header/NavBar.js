@@ -28,12 +28,9 @@ const NavBar = () => {
       <section className={menu ? "navbar-menu" : "navbar-menu is-active"} >
         <Categories items={listCategories} />
         <section className="navbar-end">
-          <a href="/" className="navbar-item">
+          <NavLink to="/cart" className="navbar-item mr-5">
             <CartWidget count={4} />
-          </a>
-          <a href="/" className="navbar-item">
-            Cuenta
-          </a>
+          </NavLink>
         </section>
       </section>
     </nav>

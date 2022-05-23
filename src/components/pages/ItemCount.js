@@ -1,30 +1,14 @@
 import React from "react";
-import { useState } from "react";
-const ItemCount = ({ stock }) => {
-  const [count, setCount] = useState(0);
-  const handleClick = (e) => {
-    switch (e.target.getAttribute("aria-label")) {
-      case "increment":
-        if (count + 1 <= stock) setCount(count + 1);
-        else alert("Stock no disponible");
-        break;
-      case "decrement":
-        if (count - 1 >= 0) setCount(count - 1);
-        break;
-      default:
-        break;
-    }
-    console.log();
-  };
+const ItemCount = ({ onAdd, count}) => {
 
   return (
     <>
       <section className="input-numeric">
-        <button aria-label="decrement" onClick={handleClick}>
+        <button aria-label="decrement" onClick={() => onAdd("decrement")}>
           -
         </button>
         <input className="input" disabled type="text" value={count} />
-        <button aria-label="increment" onClick={handleClick}>
+        <button aria-label="increment" onClick={() => onAdd("increment")}>
           +
         </button>
       </section>
