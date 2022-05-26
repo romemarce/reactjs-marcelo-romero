@@ -1,10 +1,17 @@
-import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { AllContext } from "../Context/AllContext";
 import ItemCount from "./ItemCount";
 
 const ItemDetail = ({ product }) => {
   const { title, price, pictureUrl, description, stock } = product;
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(1);
+
+  const { addItem } = useContext(AllContext).cartList
+
+  const handleAddProduct = ()=>{
+    addItem( {...product, amount: count} )
+    setCount(1)
+  }
   const handleClick = (type) => {
     console.log(type)
     switch (type) {
@@ -27,7 +34,7 @@ const ItemDetail = ({ product }) => {
           <p className="subtitle">{description}</p>
           <p className="product-single-price">${price}</p>
           <ItemCount onAdd={handleClick} count={count} />
-          <NavLink to={"/cart"} className={"button is-dark mt-5"}>Agregar al carrito</NavLink>
+          <button className="button is-dark mt-5" onClick={handleAddProduct}>Agregar al carrito</button>
         </div>
       </article>
     </>

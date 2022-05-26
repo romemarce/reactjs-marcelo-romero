@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AllContext } from "../Context/AllContext";
+import deleteIcon from "./../../assets/img/delete-icon.png"
 
 const CartListContainer = () => {
+  const { cartList } = useContext(AllContext)
+  const { cart, removeItem, clearItems } = cartList
+
   return (
     <main className="contaier">
       <section className="columns is-multiline is-mobile">
         <section className="column is-12">
-          <h1 className="title m-5">En construcción</h1>
-
           <table className="table" style={{ width: "100%", maxWidth: "80%", margin: "10px auto" }}>
             <thead>
               <tr>
@@ -16,6 +19,7 @@ const CartListContainer = () => {
                 <th>Precio</th>
                 <th>Cantidad</th>
                 <th>SubTotal</th>
+                <th style={{width: "5%"}}></th>
               </tr>
             </thead>
             <tfoot>
@@ -25,21 +29,29 @@ const CartListContainer = () => {
                   <input style={{ maxWidth: "400px", display: "block" }} className="input" type="text" placeholder="Código de descuento..." />
                 </th>
                 <th>Total: $500
-                <button className="button mt-3 is-dark" style={{display:"block"}}>Finalizar compra</button>
+                  <button className="button mt-3 is-dark" style={{ display: "block" }}>Finalizar compra</button>
                 </th>
               </tr>
             </tfoot>
             <tbody>
-              <tr>
-                <th>1</th>
-                <th>Imagen</th>
-                <th>Nombre producto</th>
-                <th>$500</th>
-                <th>1</th>
-                <th>$500</th>
-              </tr>
+              {
+                cart && cart.map(({ id, title, price, pictureUrl, amount }) =>
+                  <tr key={id} className="table-tr">
+                    <th>{id}</th>
+                    <th><img src={pictureUrl} width="100px" alt={title} /></th>
+                    <th>{title}</th>
+                    <th>${price}</th>
+                    <th>{amount}</th>
+                    <th>${price}</th>
+                    <td>
+                      <img onClick={()=>removeItem(id)} src={deleteIcon} alt="remove" className="pt-5" />
+                    </td>
+                  </tr>
+                )
+              }
             </tbody>
           </table>
+          <button className="button" onClick={clearItems}> Limpiar carrito </button>
         </section>
       </section>
     </main>
