@@ -4,19 +4,24 @@ import ItemCount from "./ItemCount";
 
 const ItemDetail = ({ product }) => {
   const { title, price, pictureUrl, description, stock } = product;
+  const [stockEnable, setStockEnable] = useState(stock)
   const [count, setCount] = useState(1);
 
   const { addItem } = useContext(AllContext).cartList
 
   const handleAddProduct = ()=>{
     addItem( {...product, amount: count} )
-    setCount(1)
+    setStockEnable( stockEnable - count)
+    if(stockEnable - count > 0)
+      setCount(1)
+    else
+      setCount(0)
   }
   const handleClick = (type) => {
-    console.log(type)
+    
     switch (type) {
       case "increment":
-        if (count + 1 <= stock) setCount(count + 1);
+        if (count + 1 <= stockEnable) setCount(count + 1);
         else alert("Stock no disponible");
         break;
       case "decrement":

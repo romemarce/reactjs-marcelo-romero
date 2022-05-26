@@ -1,15 +1,28 @@
-import React from "react"
+import React, { useContext, useEffect } from "react"
 import { useState } from "react";
 import { NavLink } from "react-router-dom"
 import CartWidget from "./CartWidget"
 import Categories from "./Categories"
 
 import listCategories from "./../../assets/data/categories.json";
+import { AllContext } from "../Context/AllContext";
 
 
 const NavBar = () => {
-  const [menu,setMenu] = useState(true)
-  const toggleMenu = () =>{
+  const { cartList } = useContext(AllContext)
+  const { cart } = cartList
+
+  const [cardCount, setCardCount] = useState(0)
+
+  useEffect(() => {
+    let cant = 0;
+    cart.map(e => cant += e.amount)
+
+    setCardCount(cant)
+  }, [cart])
+
+  const [menu, setMenu] = useState(true)
+  const toggleMenu = () => {
     setMenu(!menu)
   }
 
@@ -28,9 +41,11 @@ const NavBar = () => {
       <section className={menu ? "navbar-menu" : "navbar-menu is-active"} >
         <Categories items={listCategories} />
         <section className="navbar-end">
-          <NavLink to="/cart" className="navbar-item mr-5">
-            <CartWidget count={4} />
-          </NavLink>
+          {cardCount > 0 &&
+            <NavLink to="/cart" className="navbar-item mr-5">
+              <CartWidget count={cardCount} />
+            </NavLink>
+          }
         </section>
       </section>
     </nav>
