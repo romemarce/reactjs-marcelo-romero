@@ -1,11 +1,16 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AllContext } from "../Context/AllContext";
 import ItemCount from "./ItemCount";
 
 const ItemDetail = ({ product }) => {
   const { title, price, pictureUrl, description, stock } = product;
-  const [stockEnable, setStockEnable] = useState(stock)
+  const [stockEnable, setStockEnable] = useState(1)
   const [count, setCount] = useState(1);
+
+  useEffect(()=>{
+    setStockEnable(stock)
+  },[product])
+
 
   const { addItem } = useContext(AllContext).cartList
 

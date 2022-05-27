@@ -4,40 +4,28 @@ import { useParams } from "react-router-dom";
 import ItemDetail from "./ItemDetail";
 import ErrorMessage from "./utils/ErrorMessage";
 import Loading from "./utils/Loading";
-
-import listProduct from "./../../assets/data/products.json";
+import { doc, getDoc, getFirestore } from "firebase/firestore";
 
 const ItemDetailContainer = () => {
   const { id } = useParams()
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-
-  const getItem = (id) =>
-    new Promise((res, rej) => {
-      setTimeout(() => {
-        if (true) {
-          listProduct.forEach(e => {
-            if (parseInt(e.id) === parseInt(id)) {
-              res(e)
-            }
-          })
-        } else { rej("Error") };
-      }, 1000);
-    });
-
   useEffect(() => {
-    setLoading(true);
-    getItem(id)
-      .then((result) => {
-        setProduct(result);
-        setLoading(false);
+    const db = getFirestore();
+    const item = doc(db, "products", id)
+    getDoc(item)
+      .then((snaptshot)=>{
+        if(snaptshot.exists()){
+          setProduct({id: snaptshot.id, ...snaptshot.data()})
+        }
       })
-      .catch((err) => {
-        console.log(err);
+      .then(() => setLoading(false))
+      .catch(err => {
+        console.log(err)
         setError(err);
         setLoading(false);
-      });
+      })
   }, [id]);
   if (error) {
     return (

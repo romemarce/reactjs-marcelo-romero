@@ -4,15 +4,25 @@ import { NavLink } from "react-router-dom"
 import CartWidget from "./CartWidget"
 import Categories from "./Categories"
 
-import listCategories from "./../../assets/data/categories.json";
 import { AllContext } from "../Context/AllContext";
-
+import { collection, getDocs, getFirestore } from "firebase/firestore"
 
 const NavBar = () => {
   const { cartList } = useContext(AllContext)
   const { cart } = cartList
 
   const [cardCount, setCardCount] = useState(0)
+  const [listCategories, setListCategories] = useState([])
+
+  useEffect(() => {
+    const db = getFirestore();
+    const itemCollection = collection(db, "categories");
+    getDocs(itemCollection)
+      .then(({ docs }) => {
+        setListCategories(docs.map(doc => ({ id: doc.id, ...doc.data() })))
+      })
+      .catch(err => console.log(err))
+  }, [])
 
   useEffect(() => {
     let cant = 0;
