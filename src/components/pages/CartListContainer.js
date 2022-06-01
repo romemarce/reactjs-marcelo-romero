@@ -1,71 +1,119 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AllContext } from "../Context/AllContext";
-import deleteIcon from "./../../assets/img/delete-icon.png"
-
-
+import CartTable from "./CartTable";
 import ErrorMessage from "./utils/ErrorMessage";
 
 const CartListContainer = () => {
-  const { cartList } = useContext(AllContext)
-  const { cart, removeItem, clearItems } = cartList
+  const { cartList } = useContext(AllContext);
+  const { cart, removeItem, clearItems } = cartList;
+  const [buyer, setBuyer] = useState({});
+  const [order, setOrder] = useState({ total: 0 });
+  // // console.log(cart)
+  useEffect(() => {
+    if (cartList.cart.length > 0) {
+      let items = [];
+      let total = 0;
+      cartList.cart.map(({ id, title, price, amount }) => {
+        total += amount * price;
+        items.push({
+          id,
+          title,
+          amount,
+          price,
+          subtotal: amount * price,
+        });
+      });
+      setOrder({ ...order, items, total });
+    }
+  }, [cartList]);
 
-  let totalCarrito = 0
-  if (cart.length > 0) cart.map(e => totalCarrito += e.amount * e.price)
+  const handleChange = (e) => {
+    setOrder({
+      ...order,
+      buyer: { ...order.buyer, [e.target.name]: e.target.value },
+    });
+  };
+
+  const sendData = () => {
+    console.log(order);
+  };
 
   return (
     <main className="contaier">
-      <section className="columns is-multiline is-mobile">
-        <section className="column is-12">
-          {cart.length > 0 ?
-          <table className="table" style={{ width: "100%", maxWidth: "80%", margin: "10px auto" }}>
-            <thead>
-              <tr>
-                <th>Id</th>
-                <th>Imagen</th>
-                <th>Producto</th>
-                <th>Precio</th>
-                <th>Cantidad</th>
-                <th>SubTotal</th>
-                <th style={{ width: "5%" }}></th>
-              </tr>
-            </thead>
-            <tbody>
-              {
-                cart.map(({ id, title, price, pictureUrl, amount }) =>
-                  <tr key={id} className="table-tr">
-                    <th>{id}</th>
-                    <th><img src={pictureUrl} width="100px" alt={title} /></th>
-                    <th>{title}</th>
-                    <th>${price}</th>
-                    <th>{amount}</th>
-                    <th>${price * amount}</th>
-                    <td>
-                      <img onClick={() => removeItem(id)} src={deleteIcon} alt="remove" className="pt-5" />
-                    </td>
-                  </tr>
-                )
+      <section className="columns is-multiline is-mobile is-justify-content-space-evenly">
+        {cart.length > 0 ? (
+          <>
+            <section className="column is-12">
+              <CartTable
+                cart={cart}
+                removeItem={removeItem}
+                clearItems={clearItems}
+              />
+            </section>
+            <section className="column is-4 mb-5">
+              <article className="box">
+                <h1 className="card-header subtitle">Billing details</h1>
+                <input
+                  onChange={handleChange}
+                  className="input"
+                  type="text"
+                  placeholder="Fullname"
+                  name="name"
+                />
+                <input
+                  onChange={handleChange}
+                  className="input mt-3"
+                  type="text"
+                  placeholder="Phone"
+                  name="phone"
+                />
+                <input
+                  onChange={handleChange}
+                  className="input mt-3"
+                  type="email"
+                  placeholder="Email"
+                  name="email"
+                />
+              </article>
+            </section>
+            <section className="column is-4">
+              <article className="box">
+                <h1 className="card-header subtitle">Cart totals</h1>
+                <table width="100%">
+                  <tbody>
+                    <tr>
+                      <th>Total</th>
+                      <td>${order.total}</td>
+                    </tr>
+                    <tr>
+                      <td colSpan="2" className="has-text-centered">
+                        <button
+                          onClick={sendData}
+                          className="mt-5 button is-info is-fullwidth"
+                        >
+                          SEND ORDER
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </article>
+            </section>
+          </>
+        ) : (
+          <section className="column is-12">
+            <ErrorMessage
+              title="Carrito vacio"
+              message={
+                <p>
+                  No hay productos en su carrito.{" "}
+                  <Link to="/">Volver a la tienda</Link>
+                </p>
               }
-            </tbody>
-            <tfoot>
-              <tr>
-                <th colSpan={2}>
-                  Cupon de descuento:
-                  <input disabled style={{ maxWidth: "400px", display: "block" }} className="input" type="text" placeholder="Código de descuento..." />
-                </th>
-                <th colSpan={3}>
-                  Limpiar carrito:
-                  <button style={{ display: "block" }} className="button" onClick={clearItems}>Vaciar</button>
-                </th>
-                <th colSpan={2}>Total: ${totalCarrito}
-                  <button className="button mt-3 is-dark" style={{ display: "block" }}>Finalizar compra</button>
-                </th>
-              </tr>
-            </tfoot>
-          </table>: <ErrorMessage title="Carrito vacio" message={
-            <p>No hay productos en su carrito. <Link to="/">Volver a la tienda</Link></p>
-          } />}
-        </section>
+            />
+          </section>
+        )}
       </section>
     </main>
   );

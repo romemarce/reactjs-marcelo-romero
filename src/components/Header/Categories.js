@@ -1,7 +1,6 @@
 import React from "react"
 import { NavLink } from "react-router-dom"
 const Categories = ({ items }) => {
-  console.log(items)
   return (
     <section className="navbar-end">
       {
