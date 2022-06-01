@@ -7,6 +7,8 @@ import CartListContainer from './components/pages/CartListContainer';
 import ErrorContainer from './components/pages/ErrorContainer';
 import ItemDetailContainer from './components/pages/ItemDetailContainer';
 import ItemListContainer from './components/pages/ItemListContainer';
+import OrderConsult from './components/pages/OrderConsult';
+import OrderContainer from './components/pages/OrderContainer';
 import DefaultLayout from './layout/Default';
 const App = () => {
   const [cart, setCart] = useState([])
@@ -46,6 +48,8 @@ const App = () => {
             <Route path='/category/:id' element={<ItemListContainer />} />
             <Route path='/item/:id' element={<ItemDetailContainer />} />
             <Route path='/cart' element={<CartListContainer />} />
+            <Route path='/order' element={<OrderConsult />} />
+            <Route path='/order/:id' element={<OrderContainer />} />
 
             <Route path='/*' element={<ErrorContainer />} />
           </Routes>

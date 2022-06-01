@@ -93,6 +93,12 @@ footer {
   grid-template-columns: auto auto;
   gap: 10px;
 }
+.boxes{
+  display: grid;
+  grid-template-columns: 40% 40%;
+  justify-content: center;
+  gap: 10px;
+}
 .circle-loading {
   margin: 10% auto;
   border: 16px solid #f3f3f3;

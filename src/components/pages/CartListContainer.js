@@ -1,19 +1,24 @@
+import { useFormik } from "formik";
 import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AllContext } from "../Context/AllContext";
 import CartTable from "./CartTable";
+import ErrorInput from "./utils/ErrorInput";
 import ErrorMessage from "./utils/ErrorMessage";
 
+import {addDoc, collection, getFirestore} from "firebase/firestore"
+
 const CartListContainer = () => {
+  const navigate = useNavigate();
   const { cartList } = useContext(AllContext);
   const { cart, removeItem, clearItems } = cartList;
-  const [buyer, setBuyer] = useState({});
   const [order, setOrder] = useState({ total: 0 });
-  // // console.log(cart)
+
   useEffect(() => {
     if (cartList.cart.length > 0) {
       let items = [];
       let total = 0;
+      // eslint-disable-next-line
       cartList.cart.map(({ id, title, price, amount }) => {
         total += amount * price;
         items.push({
@@ -27,16 +32,43 @@ const CartListContainer = () => {
       setOrder({ ...order, items, total });
     }
   }, [cartList]);
+  // Validate form
+  const validate = values => {
+    const errors = {};
+    if (!values.name) {
+      errors.name = 'Falta completar';
+    } else if (values.name.length > 15) {
+      errors.name = 'Escriba menos de 15 caracteres';
+    }
 
-  const handleChange = (e) => {
-    setOrder({
-      ...order,
-      buyer: { ...order.buyer, [e.target.name]: e.target.value },
-    });
+    if (!values.phone) {
+      errors.phone = 'Falta completar';
+    } else if (values.phone.length > 15) {
+      errors.phone = 'Escriba menos de 15 caracteres';
+    }
+
+    if (!values.email) {
+      errors.email = 'Falta completar';
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+      errors.email = 'Email invalido';
+    }
+
+    return errors;
   };
+  const formik = useFormik({
+    initialValues: { name: "", email: "", phone: "" }, validate, onSubmit: values => {
+      setOrder({ ...order, buyer: values })
+      sendData()
+    }
+  })
 
   const sendData = () => {
-    console.log(order);
+
+    const db = getFirestore();
+    const orderCollection = collection(db, "orders");
+    addDoc(orderCollection, order)
+    .then(({id})=> navigate(`/order/${id}`) )
+    .catch(err => console.log(err))
   };
 
   return (
@@ -51,35 +83,44 @@ const CartListContainer = () => {
                 clearItems={clearItems}
               />
             </section>
-            <section className="column is-4 mb-5">
-              <article className="box">
-                <h1 className="card-header subtitle">Billing details</h1>
+            <form className="column is-12 mb-5 boxes" onSubmit={formik.handleSubmit}>
+              <article className="card box">
+                <h1 className="subtitle">Billing details </h1><hr />
                 <input
-                  onChange={handleChange}
-                  className="input"
+                  id="name"
+                  name="name"
+                  onChange={formik.handleChange}
+                  value={formik.values.name}
+                  className="input mt-2"
                   type="text"
                   placeholder="Fullname"
-                  name="name"
                 />
+                {formik.errors.name ? <ErrorInput title={formik.errors.name} /> : null}
+
                 <input
-                  onChange={handleChange}
-                  className="input mt-3"
+                  className="input mt-2"
+                  id="phone"
+                  name="phone"
+                  onChange={formik.handleChange}
+                  value={formik.values.phone}
                   type="text"
                   placeholder="Phone"
-                  name="phone"
                 />
+                {formik.errors.phone ? <ErrorInput title={formik.errors.phone} /> : null}
                 <input
-                  onChange={handleChange}
-                  className="input mt-3"
-                  type="email"
-                  placeholder="Email"
+                  id="email"
                   name="email"
+                  type="email"
+                  onChange={formik.handleChange}
+                  value={formik.values.email}
+                  className="input mt-2"
+                  placeholder="Email"
                 />
+                {formik.errors.email ? <ErrorInput title={formik.errors.email} /> : null}
               </article>
-            </section>
-            <section className="column is-4">
-              <article className="box">
-                <h1 className="card-header subtitle">Cart totals</h1>
+
+              <article className="card box">
+                <h1 className="subtitle">Cart totals</h1><hr />
                 <table width="100%">
                   <tbody>
                     <tr>
@@ -89,7 +130,7 @@ const CartListContainer = () => {
                     <tr>
                       <td colSpan="2" className="has-text-centered">
                         <button
-                          onClick={sendData}
+                          type="submit"
                           className="mt-5 button is-info is-fullwidth"
                         >
                           SEND ORDER
@@ -99,7 +140,7 @@ const CartListContainer = () => {
                   </tbody>
                 </table>
               </article>
-            </section>
+            </form>
           </>
         ) : (
           <section className="column is-12">
