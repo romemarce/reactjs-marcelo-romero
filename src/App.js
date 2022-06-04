@@ -9,7 +9,13 @@ import ItemDetailContainer from './components/pages/ItemDetailContainer';
 import ItemListContainer from './components/pages/ItemListContainer';
 import OrderConsult from './components/pages/OrderConsult';
 import OrderContainer from './components/pages/OrderContainer';
+import AddCategory from './components/Panel/AddCategory';
+import AddProduct from './components/Panel/AddProduct';
+import ListCategories from './components/Panel/ListCategories';
+import ListOreders from './components/Panel/ListOrders';
+import ListProduct from './components/Panel/ListProduct';
 import DefaultLayout from './layout/Default';
+import PanelLayout from './layout/Panel';
 const App = () => {
   const [cart, setCart] = useState([])
 
@@ -42,18 +48,29 @@ const App = () => {
   return (
     <AllContext.Provider value={context}>
       <BrowserRouter>
-        <DefaultLayout>
           <Routes>
-            <Route path='/' element={<ItemListContainer />} />
-            <Route path='/category/:id' element={<ItemListContainer />} />
-            <Route path='/item/:id' element={<ItemDetailContainer />} />
-            <Route path='/cart' element={<CartListContainer />} />
-            <Route path='/order' element={<OrderConsult />} />
-            <Route path='/order/:id' element={<OrderContainer />} />
+            <Route path='/' element={<DefaultLayout />}>
+              <Route path='/' element={<ItemListContainer />} />
+              <Route path='/category/:id' element={<ItemListContainer />} />
+              <Route path='/item/:id' element={<ItemDetailContainer />} />
+              <Route path='/cart' element={<CartListContainer />} />
+              <Route path='/order' element={<OrderConsult />} />
+              <Route path='/order/:id' element={<OrderContainer />} />
+            </Route>
+
+
+
+            <Route path="/panel" element={<PanelLayout />} >
+              <Route path="/panel/list-product" element={<ListProduct />} /> 
+              <Route path="/panel/add-product" element={<AddProduct />} /> 
+              <Route path="/panel/list-category" element={<ListCategories />} /> 
+              <Route path="/panel/add-category" element={<AddCategory />} /> 
+              <Route path="/panel/list-order" element={<ListOreders />} /> 
+            </Route>
+
 
             <Route path='/*' element={<ErrorContainer />} />
           </Routes>
-        </DefaultLayout>
       </BrowserRouter>
     </AllContext.Provider>
   );

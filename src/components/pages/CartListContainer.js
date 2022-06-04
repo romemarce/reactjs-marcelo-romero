@@ -58,15 +58,18 @@ const CartListContainer = () => {
   const formik = useFormik({
     initialValues: { name: "", email: "", phone: "" }, validate, onSubmit: values => {
       setOrder({ ...order, buyer: values })
-      sendData()
+      sendData( values )
     }
   })
 
-  const sendData = () => {
-
+  const sendData = ( buyer = {} ) => {
     const db = getFirestore();
     const orderCollection = collection(db, "orders");
-    addDoc(orderCollection, order)
+
+    const docData = {...order, buyer}
+
+
+    addDoc(orderCollection, docData)
     .then(({id})=> navigate(`/order/${id}`) )
     .catch(err => console.log(err))
   };
@@ -148,7 +151,7 @@ const CartListContainer = () => {
               title="Carrito vacio"
               message={
                 <p>
-                  No hay productos en su carrito.{" "}
+                  No hay productos en su carrito.
                   <Link to="/">Volver a la tienda</Link>
                 </p>
               }

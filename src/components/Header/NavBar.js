@@ -7,6 +7,8 @@ import Categories from "./Categories"
 import { AllContext } from "../Context/AllContext";
 import { collection, getDocs, getFirestore } from "firebase/firestore"
 
+import orderIcon from "./../../assets/img/order-icon.png";
+
 const NavBar = () => {
   const { cartList } = useContext(AllContext)
   const { cart } = cartList
@@ -52,10 +54,15 @@ const NavBar = () => {
         <Categories items={listCategories} />
         <section className="navbar-end">
           {cardCount > 0 &&
-            <NavLink to="/cart" className="navbar-item mr-5">
+            <NavLink to="/cart" className="navbar-item mr-2">
               <CartWidget count={cardCount} />
             </NavLink>
           }
+          <NavLink to="/order" className="navbar-item mr-5">
+            <section className="cart-widget">
+              <img src={orderIcon} alt="carrito" />
+            </section>
+          </NavLink>
         </section>
       </section>
     </nav>
