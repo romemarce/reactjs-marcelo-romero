@@ -61,6 +61,7 @@ const App = () => {
 
 
             <Route path="/panel" element={<PanelLayout />} >
+              <Route path="/panel/" element={<ListProduct />} /> 
               <Route path="/panel/list-product" element={<ListProduct />} /> 
               <Route path="/panel/add-product" element={<AddProduct />} /> 
               <Route path="/panel/list-category" element={<ListCategories />} /> 
