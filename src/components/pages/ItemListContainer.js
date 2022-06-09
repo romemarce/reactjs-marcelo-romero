@@ -5,12 +5,28 @@ import ItemList from "./ItemList";
 import Loading from "./utils/Loading";
 import { useParams } from "react-router-dom";
 import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
+// import Carousel from "./utils/Carousel";
+
+import Slider1 from "./../../assets/img/slider/slider-1.jpg";
+import Slider2 from "./../../assets/img/slider/slider-2.jpg";
+
+import Slider from "react-slick";
+
 const ItemListContainer = () => {
   const Params = useParams()
   const categorySlug = Params.id || ""
   const [listado, setListado] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  const configSlider = {
+    dots: false,
+    infinite: true,
+    fade: true,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    cssEase: "linear",
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -19,7 +35,7 @@ const ItemListContainer = () => {
     if (categorySlug !== "") {
       itemCollection = query(
         collection(db, "products"),
-        where("category", "==",categorySlug)
+        where("category", "==", categorySlug)
       )
     } else {
       itemCollection = collection(db, "products");
@@ -50,6 +66,13 @@ const ItemListContainer = () => {
     <main className="container">
       {loading ? <Loading /> :
         <section className="columns is-multiline is-mobile is-justify-content-space-around	">
+          <section className="column is-12">
+            <Slider {...configSlider}>
+              <img src={Slider1} />
+              <img src={Slider2} />
+            </Slider>
+          </section>
+
           {listado ? (
             <ItemList list={listado} />
           ) : (

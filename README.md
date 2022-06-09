@@ -9,7 +9,7 @@ La base de datos del sitio esta almacenada, gestionada y controlada por `Firebas
 
 <!-- Se agrego un panel, para gestionar las entradas de los productos -->
 
-Se agregaron variables de entorno, por lo tanto si clonas el repositorio deberias de agregar .env en el root del proyecto:
+Estr proyecto cuenta con el uso de variables de entorno, por lo tanto si clonas el repositorio deberias de agregar el archivo .env en el root del proyecto:
 ```
 REACT_APP_FIREBASE_API_KEY = "YOUR-UNIQUE-CREDENTIALS"
 REACT_APP_FIREBASE_AUTH_DOMAIN = "YOUR-PROJECT-NAME.firebaseapp.com"
@@ -22,12 +22,15 @@ REACT_APP_FIREBASE_APP_ID = "YOUR-PROJECT-APP-ID"
 
 # Librerias
 
-[Bulma.io](https://bulma.io/)
+[![formik](/public/readme/formik.svg)](https://formik.org/)
+[![Bulman.io](/public/readme/bulmaio.svg)](https://bulma.io/)
+[![Firebase](/public/readme/firebase.svg)](https://firebase.google.com/)
 
-[Firebase](https://firebase.google.com/)
+#### Formik: validacion de formularios.
+#### Bulma: Framework css.
+#### Bulma: Base de datos no sql.
 
 # Demo
-Puede ver la demo en: [RomeroTech](https://romerotech.herokuapp.com/)
-<!-- Puede ver la demo panel en: [RomeroTech-panel](https://romerotech.herokuapp.com/panel) -->
+Puede ver la demo en: [RomeroTech]()
 
 ![DEMOgif.](/public/Animation.gif "Demo")

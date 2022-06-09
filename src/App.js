@@ -1,6 +1,8 @@
 import 'bulma/css/bulma.min.css';
 import React, { useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 import './assets/css/index.css';
 import { AllContext } from './components/Context/AllContext';
 import CartListContainer from './components/pages/CartListContainer';
