@@ -28,7 +28,7 @@ REACT_APP_FIREBASE_APP_ID = "YOUR-PROJECT-APP-ID"
 
 #### Formik: validacion de formularios.
 #### Bulma: Framework css.
-#### Bulma: Base de datos no sql.
+#### Firebase: Base de datos no sql.
 
 # Demo
 Puede ver la demo en: [RomeroTech]()

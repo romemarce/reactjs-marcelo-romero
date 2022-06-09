@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { collection, addDoc, getFirestore, getDocs } from "firebase/firestore"
 
 const initialState = { pictureUrl: "http://placeimg.com/800/600/tech" }
@@ -8,6 +8,7 @@ const AddProduct = () => {
   const [product, setProduct] = useState(initialState)
   const [categories, setCategories] = useState([])
 
+  // categories
   const getAllCategories = () => {
     const db = getFirestore();
 
@@ -48,7 +49,7 @@ const AddProduct = () => {
       <form className="form" onSubmit={handleSubmit}>
         <h1 className="title">Add product</h1>
         <input onChange={handleChange} name="title" className="input" type="text" placeholder="Title product" />
-        <input onChange={handleChange} name="description" className="input mt-3" type="text" placeholder="description product" />
+        <textarea onChange={handleChange} name="description" className="textarea mt-3" type="text" placeholder="description product" />
         <input onChange={handleChange} name="pictureUrl" className="input mt-3" type="text" placeholder="picture url product" value={product.pictureUrl || ''} />
         <input onChange={handleChange} name="price" className="input mt-3" type="number" placeholder="price" />
         <input onChange={handleChange} name="stock" className="input mt-3" type="number" placeholder="stock" />
