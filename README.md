@@ -7,9 +7,7 @@ La base de datos del sitio esta almacenada, gestionada y controlada por `Firebas
 
 # Changelog
 
-<!-- Se agrego un panel, para gestionar las entradas de los productos -->
-
-Estr proyecto cuenta con el uso de variables de entorno, por lo tanto si clonas el repositorio deberias de agregar el archivo .env en el root del proyecto:
+Este proyecto cuenta con el uso de variables de entorno, por lo tanto si clonas el repositorio deberias de agregar el archivo .env en el root del proyecto:
 ```
 REACT_APP_FIREBASE_API_KEY = "YOUR-UNIQUE-CREDENTIALS"
 REACT_APP_FIREBASE_AUTH_DOMAIN = "YOUR-PROJECT-NAME.firebaseapp.com"
@@ -19,6 +17,7 @@ REACT_APP_FIREBASE_MESSAGING_SENDER_ID = "YOUR-PROJECT-SENDER-ID"
 REACT_APP_FIREBASE_APP_ID = "YOUR-PROJECT-APP-ID"
 
 ```
+Se agrego un panel, para gestionar las entradas de los productos
 
 # Librerias
 
