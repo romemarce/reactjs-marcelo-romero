@@ -18,6 +18,7 @@ import ListOreders from './components/Panel/ListOrders';
 import ListProduct from './components/Panel/ListProduct';
 import DefaultLayout from './layout/Default';
 import PanelLayout from './layout/Panel';
+import Login from './components/Panel/Login';
 const App = () => {
   const [cart, setCart] = useState([])
 
@@ -38,12 +39,18 @@ const App = () => {
   const clearItems=()=>{
     setCart([])
   }
+
+  const [user, setUser] = useState({isLogin: false, email: ""})
   const context = {
     cartList: {
       cart,
       addItem,
       removeItem,
       clearItems
+    },
+    userPanel: {
+      user,
+      setUser
     }
   }
 
