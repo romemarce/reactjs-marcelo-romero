@@ -17,21 +17,19 @@ const PanelLayout = () => {
   return (
     <>
       {
-        login &&
-        <>
-          <Header user={user} />
-          <main className="panel-container">
+        login ?
+          <>
+            <Header />
+            <main className="panel-container">
 
-            <PanelMenu />
-            <div className="box">
-              <Outlet />
-            </div>
-          </main>
-          <Footer />
-        </>
-      }
-      {
-        !login && <Login />
+              <PanelMenu />
+              <div className="box">
+                <Outlet />
+              </div>
+            </main>
+            <Footer />
+          </>
+          : <Login />
       }
     </>
   )
