@@ -6,20 +6,22 @@ import CartTable from "./CartTable";
 import ErrorInput from "./utils/ErrorInput";
 import ErrorMessage from "./utils/ErrorMessage";
 
-import {addDoc, collection, getFirestore} from "firebase/firestore"
+import { addDoc, collection, doc, getFirestore, updateDoc } from "firebase/firestore"
 
 const CartListContainer = () => {
   const navigate = useNavigate();
   const { cartList } = useContext(AllContext);
   const { cart, removeItem, clearItems } = cartList;
-  const [order, setOrder] = useState({ total: 0 });
+  const [order, setOrder] = useState({ total: 0, items: [] });
+
+  const [orderId, setOrderId] = useState(0)
 
   useEffect(() => {
     if (cartList.cart.length > 0) {
       let items = [];
       let total = 0;
       // eslint-disable-next-line
-      cartList.cart.map(({ id, title, price, amount }) => {
+      cartList.cart.map(({ id, title, price, amount, stock }) => {
         total += amount * price;
         items.push({
           id,
@@ -27,6 +29,7 @@ const CartListContainer = () => {
           amount,
           price,
           subtotal: amount * price,
+          stock
         });
       });
       setOrder({ ...order, items, total });
@@ -58,21 +61,37 @@ const CartListContainer = () => {
   const formik = useFormik({
     initialValues: { name: "", email: "", phone: "" }, validate, onSubmit: values => {
       setOrder({ ...order, buyer: values })
-      sendData( values )
+      sendData(values)
     }
   })
 
-  const sendData = ( buyer = {} ) => {
+  const sendData = async (buyer = {}) => {
     const db = getFirestore();
     const orderCollection = collection(db, "orders");
 
-    const docData = {...order, buyer}
-
-
+    // generar el order
+    const docData = { ...order, buyer }
     addDoc(orderCollection, docData)
-    .then(({id})=> navigate(`/order/${id}`) )
-    .catch(err => console.log(err))
+      .then(({ id }) => {
+        order.items.forEach(({ id, stock, amount }) => {
+          const newStock = Math.abs(stock - amount)
+          updateProductStock(db, id, newStock)
+        })
+        setTimeout(()=>{
+          // Esto esta mal
+          clearItems()
+          navigate(`/order/${id}`)
+        },[1000 * order.items.length])
+      })
+      .catch(err => console.log(err))
   };
+
+  const updateProductStock = async(db,id,newStock) => {
+    const productDoc = doc(db, "products", id)
+    await updateDoc(productDoc, {stock: newStock})
+    .then(console.log("Stock actualizado", id))
+    .catch(err => console.log("Algo salio mal", err))
+  }
 
   return (
     <main className="contaier">

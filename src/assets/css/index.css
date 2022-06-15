@@ -70,6 +70,7 @@ footer {
   object-fit: cover;
   height: 300px;
   width: 100%;
+  background-color: #e4e5e7;
 }
 
 .product-single-price {

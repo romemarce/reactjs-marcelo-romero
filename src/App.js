@@ -18,7 +18,6 @@ import ListOreders from './components/Panel/ListOrders';
 import ListProduct from './components/Panel/ListProduct';
 import DefaultLayout from './layout/Default';
 import PanelLayout from './layout/Panel';
-import Login from './components/Panel/Login';
 const App = () => {
   const [cart, setCart] = useState([])
 
