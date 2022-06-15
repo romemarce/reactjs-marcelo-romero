@@ -8,6 +8,7 @@ import { AllContext } from "../Context/AllContext";
 import { collection, getDocs, getFirestore } from "firebase/firestore"
 
 import orderIcon from "./../../assets/img/order-icon.png";
+import loginIcon from "./../../assets/img/login-icon.png";
 
 const NavBar = () => {
   const { cartList } = useContext(AllContext)
@@ -58,6 +59,9 @@ const NavBar = () => {
               <CartWidget count={cardCount} />
             </NavLink>
           }
+          <NavLink to="/panel" className="navbar-item">
+              <img style={{filter:"invert(1)"}} src={loginIcon} alt="login" />
+          </NavLink>
           <NavLink to="/order" className="navbar-item mr-5">
             <section className="cart-widget">
               <img src={orderIcon} alt="carrito" />

@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react"
 import { signInWithEmailAndPassword, getAuth } from "firebase/auth"
 import { AllContext } from "../Context/AllContext";
+import { NavLink } from "react-router-dom"
 const Login = () => {
   const { userPanel } = useContext(AllContext);
   const { setUser } = userPanel;
@@ -72,6 +73,7 @@ const Login = () => {
               </div>
             </div>
           </form>
+          <NavLink to="/" className="button is-dark">Volver</NavLink>
         </div>
       </div>
     </div>
