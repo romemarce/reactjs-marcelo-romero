@@ -94,7 +94,7 @@ const CartListContainer = () => {
   }
 
   return (
-    <main className="contaier">
+    <main className="contaier p-2">
       <section className="columns is-multiline is-mobile is-justify-content-space-evenly">
         {cart.length > 0 ? (
           <>

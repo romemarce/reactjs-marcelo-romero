@@ -41,41 +41,43 @@ const OrderContainer = () => {
   }
 
   return (
-    <main className="container">
+    <main className="container p-2">
       {loading ? <Loading /> :
         <section className="columns is-multiline is-mobile">
           {order.status ?
-            <div className="column is-12 p-6">
+            <div className="column is-12 mt-6 mb-6">
               <h1 className="title has-text-centered"> Su nota de pedido genero correctamente </h1>
               <h2 className="subtitle mt-2"> Código de operación: {orderId} </h2>
               <hr />
               <p>Detalle del pedido: </p>
               {
                 order.items.length > 0 ?
-                  <table className="table is-fullwidth">
-                    <thead>
-                      <tr><th>Nombre</th><th>Cantidad</th><th>Precio unitario</th><th>SubTotal</th></tr>
-                    </thead>
-                    <tbody>
-                      {order.items.map(({ amount, subtotal, price, title }, k) => {
-                        return (
-                          <tr key={k}>
-                            <td>{title}</td>
-                            <td>{amount}</td>
-                            <td>${price}</td>
-                            <td>${subtotal}</td>
-                          </tr>
-                        )
-                      })}
-                    </tbody>
-                    <tfoot>
-                      <tr>
-                        <td colSpan={4}>
-                          <strong>Importe total:</strong> ${order.total}
-                        </td>
-                      </tr>
-                    </tfoot>
-                  </table>
+                  <section className="order-table">
+                    <table className="table">
+                      <thead>
+                        <tr><th>Nombre</th><th>Cantidad</th><th>Precio unitario</th><th>SubTotal</th></tr>
+                      </thead>
+                      <tbody>
+                        {order.items.map(({ amount, subtotal, price, title }, k) => {
+                          return (
+                            <tr key={k}>
+                              <td>{title}</td>
+                              <td>{amount}</td>
+                              <td>${price}</td>
+                              <td>${subtotal}</td>
+                            </tr>
+                          )
+                        })}
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <td colSpan={4}>
+                            <strong>Importe total:</strong> ${order.total}
+                          </td>
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </section>
                   :
                   "Error al mostrar productos"
               }

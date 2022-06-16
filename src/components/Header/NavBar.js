@@ -60,9 +60,9 @@ const NavBar = () => {
             </NavLink>
           }
           <NavLink to="/panel" className="navbar-item">
-              <img style={{filter:"invert(1)"}} src={loginIcon} alt="login" />
+              <img src={loginIcon} alt="login" />
           </NavLink>
-          <NavLink to="/order" className="navbar-item mr-5">
+          <NavLink to="/order" className="navbar-item">
             <section className="cart-widget">
               <img src={orderIcon} alt="carrito" />
             </section>

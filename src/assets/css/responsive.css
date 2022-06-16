@@ -1,0 +1,24 @@
+@media screen and (max-width: 42em){
+  .navbar-item{
+    text-align: center;
+    margin-right: 0;
+  }
+  .navbar-item img{
+    filter: invert(0);
+  }
+
+  .product-single {
+    grid-template-columns: auto;
+  }
+  .cart-widget span{
+    right: initial;
+  }
+  .boxes {
+    grid-template-columns: auto;
+  }
+  .cart-table{
+    max-width: 350px;
+    margin: 0 auto;
+    overflow: scroll;
+  }
+}

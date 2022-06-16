@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import './assets/css/index.css';
+import './assets/css/responsive.css';
 import { AllContext } from './components/Context/AllContext';
 import CartListContainer from './components/pages/CartListContainer';
 import ErrorContainer from './components/pages/ErrorContainer';

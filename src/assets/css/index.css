@@ -23,11 +23,9 @@ footer {
 .cart-widget {
   position: relative;
 }
-
-.cart-widget img {
+.navbar-item img{
   filter: invert(1);
 }
-
 .cart-widget span {
   position: absolute;
   top: -9px;
@@ -131,7 +129,14 @@ footer {
   }
 }
 
-/* PANLE */
+
+.cart-table table{
+  width: 100%;
+  max-width:80%;
+  margin: 10px auto;
+}
+
+/* PANEL */
 .panel-container {
   display: grid;
   grid-template-columns: 170px auto;

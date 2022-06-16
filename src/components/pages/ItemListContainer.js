@@ -64,7 +64,7 @@ const ItemListContainer = () => {
   }
 
   return (
-    <main className="container">
+    <main className="container p-2">
       {loading ? <Loading /> :
         <section className="columns is-multiline is-mobile is-justify-content-space-around	">
           <section className="column is-12 mt-3">
