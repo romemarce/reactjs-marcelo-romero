@@ -14,8 +14,6 @@ const CartListContainer = () => {
   const { cart, removeItem, clearItems } = cartList;
   const [order, setOrder] = useState({ total: 0, items: [] });
 
-  const [orderId, setOrderId] = useState(0)
-
   useEffect(() => {
     if (cartList.cart.length > 0) {
       let items = [];

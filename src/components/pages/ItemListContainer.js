@@ -69,8 +69,8 @@ const ItemListContainer = () => {
         <section className="columns is-multiline is-mobile is-justify-content-space-around	">
           <section className="column is-12 mt-3">
             <Slider {...configSlider}>
-              <img src={Slider1} />
-              <img src={Slider2} />
+              <img src={Slider1} alt="slider1" />
+              <img src={Slider2} alt="slider2" />
             </Slider>
           </section>
 

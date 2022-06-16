@@ -1,5 +1,5 @@
 
-import React, { useEffect, useRef, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { collection, addDoc, getFirestore, getDocs } from "firebase/firestore"
 
 const initialState = { pictureUrl: "http://placeimg.com/800/600/tech" }
